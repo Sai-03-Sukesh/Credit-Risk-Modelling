@@ -526,6 +526,16 @@ st.markdown("""
             padding: 0.875rem 2rem !important;
         }
     }
+    
+    /* FORCE SELECTED TEXT AND ARROW TO BLACK (DESKTOP + MOBILE) */
+    [data-testid="stSelectbox"] [data-baseweb="select"] *,
+    [data-testid="stSelectbox"] [data-baseweb="select"] div,
+    [data-testid="stSelectbox"] [data-baseweb="select"] span,
+    [data-testid="stSelectbox"] [data-baseweb="select"] svg {
+        color: #0f172a !important;
+        fill: #0f172a !important;
+        -webkit-text-fill-color: #0f172a !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
