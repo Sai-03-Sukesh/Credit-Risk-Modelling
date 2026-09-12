@@ -263,7 +263,7 @@ st.markdown("""
     /* Individual options */
     .stSelectbox [role="option"],
     .stSelectbox [class*="option"] {
-        color: #ffffff !important;
+        color: #000000 !important;
         background: transparent !important;
         padding: 0.875rem 1rem !important;
         font-size: 1.125rem !important;
