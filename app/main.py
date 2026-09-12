@@ -160,140 +160,140 @@ st.markdown("""
         50% { box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.25); }
     }
     
-    /* ========== NUCLEAR DROPDOWN FIX ========== */
+    # /* ========== NUCLEAR DROPDOWN FIX ========== */
     
-    /* Force white text on EVERYTHING in selectbox */
-    .stSelectbox,
-    .stSelectbox *,
-    .stSelectbox div,
-    .stSelectbox span,
-    .stSelectbox p,
-    .stSelectbox [class*="st-"] {
-        color: #ffffff !important;
-    }
+    # /* Force white text on EVERYTHING in selectbox */
+    # .stSelectbox,
+    # .stSelectbox *,
+    # .stSelectbox div,
+    # .stSelectbox span,
+    # .stSelectbox p,
+    # .stSelectbox [class*="st-"] {
+    #     color: #ffffff !important;
+    # }
     
-    /* Main selectbox container */
-    .stSelectbox [data-baseweb="select"] {
-        background: rgba(30, 41, 59, 0.6) !important;
-        border: 1px solid rgba(148, 163, 184, 0.2) !important;
-        border-radius: 12px !important;
-        min-height: 56px !important;
-    }
+    # /* Main selectbox container */
+    # .stSelectbox [data-baseweb="select"] {
+    #     background: rgba(30, 41, 59, 0.6) !important;
+    #     border: 1px solid rgba(148, 163, 184, 0.2) !important;
+    #     border-radius: 12px !important;
+    #     min-height: 56px !important;
+    # }
     
-    /* Inner content wrapper */
-    .stSelectbox [data-baseweb="select"] > div {
-        background: transparent !important;
-        border: none !important;
-        padding: 0 !important;
-        color: #ffffff !important;
-    }
+    # /* Inner content wrapper */
+    # .stSelectbox [data-baseweb="select"] > div {
+    #     background: transparent !important;
+    #     border: none !important;
+    #     padding: 0 !important;
+    #     color: #ffffff !important;
+    # }
     
-    /* Control wrapper (contains the text) */
-    .stSelectbox [data-baseweb="select"] [class*="control"] {
-        background: transparent !important;
-        border: none !important;
-        padding: 1rem 1.25rem !important;
-        min-height: 56px !important;
-    }
+    # /* Control wrapper (contains the text) */
+    # .stSelectbox [data-baseweb="select"] [class*="control"] {
+    #     background: transparent !important;
+    #     border: none !important;
+    #     padding: 1rem 1.25rem !important;
+    #     min-height: 56px !important;
+    # }
     
-    /* Value container (selected value) */
-    .stSelectbox [data-baseweb="select"] [class*="ValueContainer"] {
-        padding: 0 !important;
-        color: #ffffff !important;
-    }
+    # /* Value container (selected value) */
+    # .stSelectbox [data-baseweb="select"] [class*="ValueContainer"] {
+    #     padding: 0 !important;
+    #     color: #ffffff !important;
+    # }
     
-    /* Single value (the actual text) */
-    .stSelectbox [data-baseweb="select"] [class*="singleValue"],
-    .stSelectbox [data-baseweb="select"] [class*="SingleValue"] {
-        color: #ffffff !important;
-        font-size: 1.125rem !important;
-        font-weight: 500 !important;
-    }
+    # /* Single value (the actual text) */
+    # .stSelectbox [data-baseweb="select"] [class*="singleValue"],
+    # .stSelectbox [data-baseweb="select"] [class*="SingleValue"] {
+    #     color: #ffffff !important;
+    #     font-size: 1.125rem !important;
+    #     font-weight: 500 !important;
+    # }
     
-    /* Placeholder */
-    .stSelectbox [data-baseweb="select"] [class*="placeholder"],
-    .stSelectbox [data-baseweb="select"] [class*="Placeholder"] {
-        color: rgba(255, 255, 255, 0.5) !important;
-    }
+    # /* Placeholder */
+    # .stSelectbox [data-baseweb="select"] [class*="placeholder"],
+    # .stSelectbox [data-baseweb="select"] [class*="Placeholder"] {
+    #     color: rgba(255, 255, 255, 0.5) !important;
+    # }
     
-    /* Input (when typing) */
-    .stSelectbox [data-baseweb="select"] input {
-        color: #ffffff !important;
-    }
+    # /* Input (when typing) */
+    # .stSelectbox [data-baseweb="select"] input {
+    #     color: #ffffff !important;
+    # }
     
-    /* Dropdown indicator (arrow) */
-    .stSelectbox [data-baseweb="select"] [class*="indicatorContainer"] svg,
-    .stSelectbox svg {
-        fill: #ffffff !important;
-        color: #ffffff !important;
-    }
+    # /* Dropdown indicator (arrow) */
+    # .stSelectbox [data-baseweb="select"] [class*="indicatorContainer"] svg,
+    # .stSelectbox svg {
+    #     fill: #ffffff !important;
+    #     color: #ffffff !important;
+    # }
     
-    /* Hover state */
-    .stSelectbox [data-baseweb="select"]:hover {
-        background: rgba(30, 41, 59, 0.7) !important;
-        border-color: rgba(59, 130, 246, 0.4) !important;
-    }
+    # /* Hover state */
+    # .stSelectbox [data-baseweb="select"]:hover {
+    #     background: rgba(30, 41, 59, 0.7) !important;
+    #     border-color: rgba(59, 130, 246, 0.4) !important;
+    # }
     
-    /* Focus state */
-    .stSelectbox [data-baseweb="select"]:focus-within {
-        background: rgba(30, 41, 59, 0.8) !important;
-        border: 1px solid #3b82f6 !important;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
-        animation: focusGlow 1.5s ease-in-out infinite;
-    }
+    # /* Focus state */
+    # .stSelectbox [data-baseweb="select"]:focus-within {
+    #     background: rgba(30, 41, 59, 0.8) !important;
+    #     border: 1px solid #3b82f6 !important;
+    #     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+    #     animation: focusGlow 1.5s ease-in-out infinite;
+    # }
     
-    /* Dropdown menu */
-    .stSelectbox [data-baseweb="popover"],
-    .stSelectbox [role="listbox"] {
-        background: rgba(30, 41, 59, 0.95) !important;
-        backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(59, 130, 246, 0.3) !important;
-        border-radius: 12px !important;
-        padding: 0.5rem !important;
-        margin-top: 0.5rem !important;
-    }
+    # /* Dropdown menu */
+    # .stSelectbox [data-baseweb="popover"],
+    # .stSelectbox [role="listbox"] {
+    #     background: rgba(30, 41, 59, 0.95) !important;
+    #     backdrop-filter: blur(10px) !important;
+    #     border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    #     border-radius: 12px !important;
+    #     padding: 0.5rem !important;
+    #     margin-top: 0.5rem !important;
+    # }
     
-    /* Menu list */
-    .stSelectbox [class*="menuList"],
-    .stSelectbox [class*="MenuList"] {
-        background: transparent !important;
-        padding: 0 !important;
-    }
+    # /* Menu list */
+    # .stSelectbox [class*="menuList"],
+    # .stSelectbox [class*="MenuList"] {
+    #     background: transparent !important;
+    #     padding: 0 !important;
+    # }
     
-    /* Individual options */
-    .stSelectbox [role="option"],
-    .stSelectbox [class*="option"] {
-        color: #000000 !important;
-        background: transparent !important;
-        padding: 0.875rem 1rem !important;
-        font-size: 1.125rem !important;
-        font-weight: 500 !important;
-        border-radius: 8px !important;
-        margin: 0.25rem 0 !important;
-        transition: all 0.2s ease !important;
-    }
+    # /* Individual options */
+    # .stSelectbox [role="option"],
+    # .stSelectbox [class*="option"] {
+    #     color: #000000 !important;
+    #     background: transparent !important;
+    #     padding: 0.875rem 1rem !important;
+    #     font-size: 1.125rem !important;
+    #     font-weight: 500 !important;
+    #     border-radius: 8px !important;
+    #     margin: 0.25rem 0 !important;
+    #     transition: all 0.2s ease !important;
+    # }
     
-    /* Option hover */
-    .stSelectbox [role="option"]:hover,
-    .stSelectbox [class*="option"]:hover {
-        background: rgba(59, 130, 246, 0.25) !important;
-        color: #ffffff !important;
-    }
+    # /* Option hover */
+    # .stSelectbox [role="option"]:hover,
+    # .stSelectbox [class*="option"]:hover {
+    #     background: rgba(59, 130, 246, 0.25) !important;
+    #     color: #ffffff !important;
+    # }
     
-    /* Selected option */
-    .stSelectbox [role="option"][aria-selected="true"],
-    .stSelectbox [class*="option--is-selected"] {
-        background: rgba(59, 130, 246, 0.35) !important;
-        color: #ffffff !important;
-        font-weight: 600 !important;
-    }
+    # /* Selected option */
+    # .stSelectbox [role="option"][aria-selected="true"],
+    # .stSelectbox [class*="option--is-selected"] {
+    #     background: rgba(59, 130, 246, 0.35) !important;
+    #     color: #ffffff !important;
+    #     font-weight: 600 !important;
+    # }
     
-    /* Focused option */
-    .stSelectbox [role="option"][class*="focused"],
-    .stSelectbox [class*="option--is-focused"] {
-        background: rgba(59, 130, 246, 0.2) !important;
-        color: #ffffff !important;
-    }
+    # /* Focused option */
+    # .stSelectbox [role="option"][class*="focused"],
+    # .stSelectbox [class*="option--is-focused"] {
+    #     background: rgba(59, 130, 246, 0.2) !important;
+    #     color: #ffffff !important;
+    # }
     
     /* Premium Gradient Button */
     .stButton > button {
@@ -525,16 +525,6 @@ st.markdown("""
             font-size: 1rem !important;
             padding: 0.875rem 2rem !important;
         }
-    }
-    
-    /* FORCE SELECTED TEXT AND ARROW TO BLACK (DESKTOP + MOBILE) */
-    [data-testid="stSelectbox"] [data-baseweb="select"] *,
-    [data-testid="stSelectbox"] [data-baseweb="select"] div,
-    [data-testid="stSelectbox"] [data-baseweb="select"] span,
-    [data-testid="stSelectbox"] [data-baseweb="select"] svg {
-        color: #0f172a !important;
-        fill: #0f172a !important;
-        -webkit-text-fill-color: #0f172a !important;
     }
 </style>
 """, unsafe_allow_html=True)
