@@ -3,7 +3,7 @@ from prediction_helper import predict
 
 # MUST BE FIRST - Page Configuration
 st.set_page_config(
-    page_title="CredSecure AI",
+    page_title="Credit Risk Modelling",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="collapsed"
