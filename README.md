@@ -13,12 +13,9 @@ The platform features an interactive, modern **Streamlit** dashboard tailored fo
 
 ---
 
-## Business Problem & Context
+## Problem Statement
 
-Non-Banking Financial Companies (NBFCs) and retail lenders face high operational costs and loss rates due to manual, subjective underwriting. This project automates the risk evaluation pipeline by:
-* Predicting the individual likelihood of default ($P(\text{Default})$) from demographic, loan, and bureau indicators.
-* Transforming probabilities into an interpretable credit scorecard calibrated to industry credit tiering.
-* Laying the algorithmic foundation for **Straight-Through Processing (STP)** for prime, low-risk applicants.
+Lending institutions need to assess creditworthiness before approving loans. Manually reviewing applications is slow and inconsistent. This system automates the risk assessment pipeline — given a borrower's financial profile, it predicts the likelihood of default and outputs a structured credit score with a rating.
 
 ---
 
@@ -74,9 +71,6 @@ The dataset consolidates three tables joined via unique primary key `cust_id`:
 | `loans.csv` | 50,000 | 15 | Financials: Sanction/Disbursed Amounts, Tenure, Purpose, `default` flag |
 | `bureau_data.csv` | 50,000 | 8 | Credit Bureau History: DPD, Delinquent Months, Accounts, Utilization |
 
-* **Class Distribution**: Non-Default (`0`) = 45,703 (91.41%), Default (`1`) = 4,297 (8.59%).
-* **Imbalance Ratio**: ~10.6:1 (Requires targeted sampling and threshold calibration).
-
 ---
 
 ## Machine Learning Lifecycle
@@ -118,6 +112,7 @@ One-hot encoding (`drop_first=True`) on remaining categorical features: `residen
 SMOTETomek combines oversampling of minority class with Tomek link removal to clean decision boundaries.
 
 **Final model: Logistic Regression (Attempt 3)** — chosen for interpretability while matching XGBoost performance.
+
 ---
 
 ## Performance & Validation
@@ -129,6 +124,7 @@ SMOTETomek combines oversampling of minority class with Tomek link removal to cl
 | KS Statistic | Strong rank ordering across all deciles |
 
 **Rank ordering** confirmed — deciles with highest predicted default probability consistently show the highest actual default rates.
+
 ---
 
 ## Credit Score System
