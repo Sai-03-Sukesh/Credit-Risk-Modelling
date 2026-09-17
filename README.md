@@ -90,69 +90,65 @@ The dataset consolidates three tables joined via unique primary key `cust_id`:
 
 ### 3. Feature Engineering
 
-| Feature | Formula | Financial Rationale |
+| Feature | Formula | Insight |
 |---|---|---|
-| `loan_to_income` | $\frac{\text{loan\_amount}}{\text{income}}$ | Measures leverage burden relative to borrower earning capacity. |
-| `delinquency_ratio` | $\frac{\text{delinquent\_months}}{\text{total\_loan\_months}} \times 100$ | Percentage of active credit lifecycle spent in past-due status. |
-| `avg_dpd_per_delinquency` | $\frac{\text{total\_dpd}}{\text{delinquent\_months}}$ | Reflects structural payment distress vs. accidental short delay. |
+| `loan_to_income` | `loan_amount / income` | Higher LTI → higher default risk |
+| `delinquency_ratio` | `delinquent_months / total_loan_months × 100` | % of loan life spent delinquent |
+| `avg_dpd_per_delinquency` | `total_dpd / delinquent_months` (0 if none) | Severity of late payments |
 
-### 4. Feature Selection & Pruning
-* **Multicollinearity Elimination (VIF)**: Dropped redundant linear combinations (`sanction_amount`, `processing_fee`, `gst`, `net_disbursement`, `principal_outstanding`).
-* **Information Value (IV) / WOE**: Retained features with $\text{IV} \ge 0.02$, stripping non-predictive noise (e.g., localized demographic identifiers).
-* **Encoding**: One-hot encoded remaining categorical attributes (`residence_type`, `loan_purpose`, `loan_type`) with reference base categories dropped (`drop_first=True`).
+### 4. Feature Selection
 
-### 5. Benchmark Experiments & Modeling Matrix
+**VIF Analysis** — Removed multicollinear features:
+`sanction_amount`, `processing_fee`, `gst`, `net_disbursement`, `principal_outstanding`
 
-| Iteration | Candidate Architecture | Resampling Strategy | Optimization Method | Performance / Status |
-|:---:|---|---|---|---|
-| **1** | Logistic Regression / Random Forest / XGBoost | None (Class Imbalance Intact) | Default baseline | High precision, inadequate minority recall |
-| **2** | Logistic Regression + XGBoost | Random Under Sampling | RandomizedSearchCV | Information loss from undersampling |
-| **3** | **Logistic Regression (Production)** | **SMOTETomek** | **Optuna (50 Trials)** | **Best Generalized Explainability (Selected)** |
-| **4** | XGBoost Classifier | SMOTETomek | Optuna (50 Trials) | Matched AUC-ROC; rejected due to black-box nature |
+**Weight of Evidence (WOE) / Information Value (IV)** — Retained only features with IV > 0.02, removing low-signal columns like `city`, `state`, `gender`, `marital_status`, `employment_status`.
 
-> **Selection Justification**: In compliance with regulatory standards (e.g., Fair Lending / RBI guidelines) and project SOW constraints, **Logistic Regression** was chosen as it delivers mathematical parameter transparency ($W^T x + b$), coefficient interpretability, and direct score translation while matching gradient boosted tree performance.
+### 5. Encoding
+One-hot encoding (`drop_first=True`) on remaining categorical features: `residence_type`, `loan_purpose`, `loan_type`.
 
+### 6. Modeling — 4 Attempts
+
+| Attempt | Model | Imbalance Handling | Tuning |
+|---|---|---|---|
+| 1 | LR / RF / XGBoost | None | None |
+| 2 | LR + XGBoost | RandomUnderSampler | RandomizedSearchCV |
+| 3 | Logistic Regression | SMOTETomek | Optuna (50 trials) |
+| 4 | XGBoost | SMOTETomek | Optuna (50 trials) |
+
+SMOTETomek combines oversampling of minority class with Tomek link removal to clean decision boundaries.
+
+**Final model: Logistic Regression (Attempt 3)** — chosen for interpretability while matching XGBoost performance.
 ---
 
 ## Performance & Validation
 
-```text
-  Metric                  Validation Result
-  =========================================
-  ROC-AUC Score           0.98
-  Gini Coefficient        0.96
-  KS-Statistic            > 65% (Strong separation)
-  Decile Rank Ordering    Monotonic default distribution
+| Metric | Value |
+|---|---|
+| AUC-ROC | **0.98** |
+| Gini Coefficient | **0.96** |
+| KS Statistic | Strong rank ordering across all deciles |
+
+**Rank ordering** confirmed — deciles with highest predicted default probability consistently show the highest actual default rates.
+---
+
+## Credit Score System
+
+The model's default probability is mapped to a **300–900 credit score**:
+
+```
+credit_score = 300 + (1 - default_probability) × 600
 ```
 
-* **Gini & Decile Validation**: Risk profiles demonstrated pure monotonic rank-ordering; top deciles capture over 80% of systemic defaults.
+| Score Range | Rating |
+|---|---|
+| 750 – 900 | Excellent |
+| 650 – 749 | Good |
+| 500 – 649 | Average |
+| 300 – 499 | Poor |
 
 ---
 
-## Scorecard & Risk Classification
-
-The model computes log-odds, maps them through the sigmoid link function to determine $P(\text{Default})$, and derives the non-default probability $P(\text{Non-Default})$:
-
-$$\text{Log-Odds: } z = \mathbf{w}^T \mathbf{x} + b$$
-
-$$P(\text{Default}) = \frac{1}{1 + e^{-z}}$$
-
-$$P(\text{Non-Default}) = 1 - P(\text{Default})$$
-
-$$\text{Credit Score} = 300 + \Big(P(\text{Non-Default}) \times 600\Big)$$
-
-### Risk Tier Alignment
-
-| Score Band | Category Rating | Underwriting Action | Phase 2 STP Policy |
-|:---:|:---:|---|---|
-| **750 – 900** | **Excellent** | Immediate Approval / Preferential APR | **Straight-Through Processing (STP)** |
-| **650 – 749** | **Good** | Standard Approval Workflow | Fast-Track Verification |
-| **500 – 649** | **Average** | Enhanced Collateral / Income Audit | Manual Underwriter Review |
-| **300 – 499** | **Poor** | Automated Reject / Adverse Action Notice | Rejected |
-
----
-
-## Repository Structure
+## Project Structure
 
 ```text
 .
@@ -186,6 +182,21 @@ Launch the interactive loan officer portal:
 cd app
 streamlit run main.py
 ```
+---
+
+## Tech Stack
+
+| Category | Tools |
+|---|---|
+| Language | Python 3.10 |
+| ML | scikit-learn, XGBoost, imbalanced-learn |
+| Hyperparameter Tuning | Optuna |
+| Feature Selection | WOE/IV, VIF (statsmodels) |
+| Data | Pandas, NumPy |
+| Visualization | Matplotlib, Seaborn |
+| App | Streamlit |
+| Serialization | Joblib |
+
 ---
 
 ## Key Takeaways & Best Practices
